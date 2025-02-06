@@ -4,6 +4,7 @@ config();
 import 'reflect-metadata';
 import Fastify from "fastify";
 import cors from "@fastify/cors";
+import notificationRoutes from '@/modules/notification/presentation/notification.routes';
 
 
 
@@ -28,7 +29,7 @@ const start = async () => {
       }
     });
 
-    // app.register(paymentRoutes);
+    app.register(notificationRoutes);
 
     await app.listen({
       port: Number(process.env.PORT) || 4002,
