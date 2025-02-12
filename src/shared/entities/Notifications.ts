@@ -32,6 +32,6 @@ export class Notifications {
   })
   createdAt: Date | null;
 
-  @JoinColumn([{ name: "id_user", referencedColumnName: "idUser" }])
+  @Column("uuid", { name: "id_user" })
   idUser: string;
 }
