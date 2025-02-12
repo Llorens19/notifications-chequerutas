@@ -6,6 +6,13 @@ export interface ISendEmailProps {
   from: string;
 }
 
+export interface ISendNotificationProps {
+  idUser: string;
+  title: string;
+  body: string;
+  type: string;
+}
+
 export interface ISendEmailResponse {
   state: 'success' | 'error';
 }

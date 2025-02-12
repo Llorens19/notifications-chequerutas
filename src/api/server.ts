@@ -6,7 +6,7 @@ import Fastify from "fastify";
 import cors from "@fastify/cors";
 import notificationRoutes from '@/modules/notification/presentation/notification.routes';
 
-import { AppDataSource } from "../config/typeorm.config";
+import { AppDataSource } from "@/config/typeorm.config";
 
 
 
