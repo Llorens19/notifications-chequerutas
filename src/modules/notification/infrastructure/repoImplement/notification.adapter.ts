@@ -1,7 +1,11 @@
 import { transporter } from "@/config/nodemailer.config";
-import { ISendEmailProps, ISendEmailResponse } from "@/modules/notification/domain/interfaces/sendEmail.interface";
+import { AppDataSource } from "@/config/typeorm.config";
+import { ISendEmailProps, ISendEmailResponse, ISendNotificationProps } from "@/modules/notification/domain/interfaces/sendEmail.interface";
 import { INotificationOutputPort } from "@/modules/notification/domain/repo/notification.port";
+import { Notifications } from "@/shared/entities/Notifications";
+import { INotification } from "@/shared/interfaces/entities/notification.interface";
 
+const connectionNotifications = AppDataSource.getRepository<INotification>(Notifications);
 
 export class NotificationRepoAdapter implements INotificationOutputPort {
 
@@ -12,6 +16,19 @@ export class NotificationRepoAdapter implements INotificationOutputPort {
     } catch (error) {
       return { state: 'error' }
     }
+  }
+
+  sendNotification = async ({idUser, title, body, type}: ISendNotificationProps): Promise<INotification> => {
+    const notification = connectionNotifications.create({
+      idUser,
+      title,
+      body,
+      type,
+      readed: false,
+      deleted: false,
+      createdAt: new Date()
+    });
+    return await connectionNotifications.save(notification);
   }
 
 

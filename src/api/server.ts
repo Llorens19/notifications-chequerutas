@@ -6,12 +6,14 @@ import Fastify from "fastify";
 import cors from "@fastify/cors";
 import notificationRoutes from '@/modules/notification/presentation/notification.routes';
 
+import { AppDataSource } from "@/config/typeorm.config";
 
 
 
 
 const start = async () => {
   try {
+    await AppDataSource.initialize();
     console.log("Base de datos conectada");
 
     const app = Fastify({ logger: false });
