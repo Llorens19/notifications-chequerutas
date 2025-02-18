@@ -31,5 +31,21 @@ export class NotificationRepoAdapter implements INotificationOutputPort {
     return await connectionNotifications.save(notification);
   }
 
+  deleteNotification = async (idNotification: string): Promise<INotification | null> => {
+    const notification = await connectionNotifications.findOne({ where: { idNotification } });
+    if (!notification) return null;
+
+    notification.deleted = true;
+    return await connectionNotifications.save(notification);
+
+  }
+  readNotification = async (idNotification: string): Promise<INotification | null> => {
+    const notification = await connectionNotifications.findOne({ where: { idNotification } });
+    if (!notification) return null;
+
+    notification.readed = true;
+    return await connectionNotifications.save(notification);
+  }
+
 
 }

@@ -5,4 +5,6 @@ import { INotification } from "@/shared/interfaces/entities/notification.interfa
 export interface INotificationOutputPort {
   sendEmail: (mailOptions: ISendEmailProps) => Promise<ISendEmailResponse>;
   sendNotification: (notification: ISendNotificationProps) => Promise<INotification>;
+  deleteNotification: (idNotification: string) => Promise<INotification | null>;
+  readNotification: (idNotification: string) => Promise<INotification | null>;
 }
